@@ -8,3 +8,6 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
+            # Call my powerful action!
+      - name: Check Files
+        uses: test-file@main

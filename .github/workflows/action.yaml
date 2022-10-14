@@ -8,8 +8,8 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
-  name: 'File Check Action'
-  description: 'An action that checks if the LICENSE and README.md files exists'
-  runs:
-    using: 'node12'
-    main: 'index.js'
+      - name: 'File Check Action'
+        description: 'An action that checks if the LICENSE and README.md files exists'
+        runs:
+          using: 'node12'
+          main: 'index.js'

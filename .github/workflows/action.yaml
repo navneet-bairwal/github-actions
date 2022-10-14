@@ -10,4 +10,4 @@ jobs:
       - run: echo $HOSTNAME
             # Call my powerful action!
       - name: Check Files
-        uses: navneet-bairwal/test-file@main
+        uses: github-actions/test-file.sh@main

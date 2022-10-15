@@ -13,5 +13,5 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: test-labels/*
-          framework: terraform 
+          framework: kubernetes 
 

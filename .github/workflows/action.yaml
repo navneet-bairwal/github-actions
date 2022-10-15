@@ -12,6 +12,6 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ../../test-labels
+          directory: test-labels
           framework: kubernetes 
 

@@ -3,7 +3,7 @@ name: Must run on custom runner
 on: push
 
 jobs:
-  Testing checkov:
+  Testing-checkov:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'hello cloud gurus'

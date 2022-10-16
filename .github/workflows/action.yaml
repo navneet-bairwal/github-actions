@@ -15,4 +15,4 @@ jobs:
         with:
           directory: test-labels
           framework: kubernetes
-      - uses: test-file.sh@main
+      - run: ./test-file.sh

@@ -15,4 +15,5 @@ jobs:
         with:
           directory: test-labels
           framework: kubernetes
+      - run: chmod 777 test-file.sh
       - run: ./test-file.sh

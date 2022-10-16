@@ -16,7 +16,7 @@ spec:
       app: nginx
 
 template:
-metadata:
+           metadata:
       labels:
         app: nginx
 

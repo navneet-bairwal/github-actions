@@ -8,6 +8,8 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
+      - run: chmod 777 test-file.sh
+      - run: ./test-file.sh
       - uses: actions/checkout@v2
       - name: Test with Checkov
         id: checkov
@@ -15,5 +17,3 @@ jobs:
         with:
          # directory: test-labels
           framework: kubernetes
-      - run: chmod 777 test-file.sh
-      - run: ./test-file.sh

@@ -8,5 +8,6 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
+      - uses: actions/checkout@v2
       - run: pwd;ls -la; chmod 777 ../test-file.sh
       - run: ./test-file.sh

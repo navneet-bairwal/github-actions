@@ -8,12 +8,5 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
-      - run: pwd; chmod 777 ./test-file.sh
+      - run: pwd; chmod 777 ../test-file.sh
       - run: ./test-file.sh
-      - uses: actions/checkout@v2
-      - name: Test with Checkov
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-         # directory: test-labels
-          framework: kubernetes

@@ -8,5 +8,5 @@ jobs:
     steps:
       - run: echo 'hello cloud gurus'
       - run: echo $HOSTNAME
-      - run: pwd; chmod 777 ../test-file.sh
+      - run: pwd;ls-l; chmod 777 ../test-file.sh
       - run: ./test-file.sh

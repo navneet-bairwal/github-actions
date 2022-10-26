@@ -1,6 +1,9 @@
 name: Must run on custom runner
 
-on: push
+on: 
+  push:
+      branches:
+        - main
 
 jobs:
   Testing-checkov:

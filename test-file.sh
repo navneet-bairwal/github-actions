@@ -25,4 +25,5 @@ fi
 done
 echo "hello-test" >> actions-test.txt
 cat actions-test.txt
+exit 1
 echo "END OF LOOP"

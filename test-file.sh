@@ -1,6 +1,25 @@
 echo "This is test script"
-for i in `ls -lR |egrep -i ".yaml|.yml"|awk '{print $NF}'`
+for i in `find . -type f \( -name "*.yaml" -o -name "*.yml" \)`
 do
-echo "This is list $i"
+echo "#########"
+#echo $i
+
+####   checking file is valid yaml/kubernetes file or not ############
+`yq .kind,.apiVersion $i  -e  >/dev/null 2>&1`
+
+#echo $output
+if [[ $? -eq 0 ]]; then
+  echo "The file is valid yaml  $i"
+    for y in team: environment: service: hello:
+    do
+      yq '.metadata' $i|awk '{print $1}'|grep -i  $y  >/dev/null 2>&1
+      if [[ $? -ne 0 ]]; then
+        echo "required tags are missing from metadata/annotations"
+        break
+      fi
+      #echo "loop continues"
+    done
+  #yq '.metadata.annotations|keys' $i
+fi
 done
 echo "END OF LOOP"

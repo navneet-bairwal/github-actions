@@ -14,3 +14,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: chmod 777 test-file.sh
       - run: ./test-file.sh
+      - run: echo "::warning file=app.js,line=1,col=5,endColumn=7::Missing semicolon"

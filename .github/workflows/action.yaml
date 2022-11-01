@@ -6,11 +6,11 @@ on:
         - main
 
 jobs:
-  Testing-checkov:
+  Testing-Annotations:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'hello cloud gurus'
-      - run: echo $HOSTNAME
+      #- run: echo 'hello cloud gurus'
+      #- run: echo $HOSTNAME
       - uses: actions/checkout@v2
       - run: chmod 777 test-file.sh
       - run: ./test-file.sh

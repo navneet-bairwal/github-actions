@@ -14,7 +14,7 @@ if [[ $? -eq 0 ]]; then
     do
       yq '.metadata' $i|awk '{print $1}'|grep -i  $y  >/dev/null 2>&1
       if [[ $? -ne 0 ]]; then
-        echo "required tags/tags/annotations are missing from $i" >> actions-test.txt
+        echo "required tags/tags/annotations are missing from $i" >> missing_annotations
         echo "required tags are missing from metadata/annotations"
        # echo "::workflow-command this is sample warning"
         break
@@ -24,5 +24,7 @@ if [[ $? -eq 0 ]]; then
   #yq '.metadata.annotations|keys' $i
 fi
 done
-cat actions-test.txt >> $GITHUB_ENV
+if [ -f missing_annotations ]; then
+sed -i '1s/^/There are missing annotations in below file. Kindly refer "https://opengovinc.atlassian.net/wiki/spaces/CloudPlatform/pages/2853929005/Tagging+Annotation+Guidelines"  \n/' missing_annotations
+#cat actions-test.txt >> $GITHUB_ENV
 echo "END OF LOOP"

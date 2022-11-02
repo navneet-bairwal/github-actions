@@ -24,6 +24,6 @@ if [[ $? -eq 0 ]]; then
   #yq '.metadata.annotations|keys' $i
 fi
 done
-echo "hello-test" >> actions-test.txt
+echo "hello-test-1" >> actions-test.txt
 #cat actions-test.txt
 echo "END OF LOOP"

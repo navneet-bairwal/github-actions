@@ -3,7 +3,7 @@ name: Must run on custom runner
 on: 
   push:
       branches:
-        - main
+        - main  
 
 jobs:
   Testing-Annotations:
@@ -14,5 +14,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: chmod 777 test-file.sh
       - run: ./test-file.sh
-      - run: "test=`cat actions-test.txt`" >> $GITHUB_ENV
+      - run: cat actions-test.txt >> $GITHUB_ENV
       - run: echo "::warning "${{ env.test }}""

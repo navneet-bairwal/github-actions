@@ -24,6 +24,5 @@ if [[ $? -eq 0 ]]; then
   #yq '.metadata.annotations|keys' $i
 fi
 done
-echo "hello-test-1" >> actions-test.txt
-#cat actions-test.txt
+cat actions-test.txt >> $GITHUB_ENV
 echo "END OF LOOP"

@@ -1,6 +1,0 @@
-required tags are missing from metadata/annotations
-required tags are missing from metadata/annotations
-hello-test
-required tags/tags/annotations are missing from ./test.yaml
-required tags/tags/annotations are missing from ./test-labels/kubernetes.yaml
-hello-test

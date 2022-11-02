@@ -14,5 +14,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: chmod 777 test-file.sh
       - run: ./test-file.sh
-      - run: cat "{actions-test.txt}" >> $GITHUB_ENV 
-      - run: echo "::warning "${{ env }}""
+      - run: test=`cat actions-test.txt` >> $GITHUB_ENV
+      - run: echo "::warning "${{ env.test }}""

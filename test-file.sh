@@ -14,7 +14,7 @@ if [[ $? -eq 0 ]]; then
     do
       yq '.metadata' $i|awk '{print $1}'|grep -i  $y  >/dev/null 2>&1
       if [[ $? -ne 0 ]]; then
-        echo "required tags are missing from metadata/annotations" >> actions-test.txt
+        echo "required tags/tags/annotations are missing from $i" >> actions-test.txt
         echo "required tags are missing from metadata/annotations"
        # echo "::workflow-command this is sample warning"
         break
@@ -25,5 +25,5 @@ if [[ $? -eq 0 ]]; then
 fi
 done
 echo "hello-test" >> actions-test.txt
-cat actions-test.txt
+#cat actions-test.txt
 echo "END OF LOOP"

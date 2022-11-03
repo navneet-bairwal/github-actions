@@ -15,8 +15,6 @@ on:
 #       - run: chmod 777 test-file.sh
 #       - run: ./test-file.sh
 #       - run: echo "::warning file=missing_annotations ::Missing semicolon"
-name: Run OPA Tests
-on: [push]
 jobs:
   Run-OPA-Tests:
     runs-on: ubuntu-latest

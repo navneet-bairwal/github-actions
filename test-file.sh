@@ -25,6 +25,7 @@ if [[ $? -eq 0 ]]; then
 fi
 done
 if [ -f missing_annotations ]; then
-sed -i '1s/^/There are missing annotations in below file. Kindly refer "https://opengovinc.atlassian.net/wiki/spaces/CloudPlatform/pages/2853929005/Tagging+Annotation+Guidelines"  \n/' missing_annotations
+  sed -i '1s/^/hello\n/' missing_annotations
 #cat actions-test.txt >> $GITHUB_ENV
+fi
 echo "END OF LOOP"

@@ -1,3 +1,18 @@
+# Label Existence
+# ---------------
+#
+# This example extends Hello World to ensure that all Kubernetes resources specify
+# a 'costcenter' label and do so with the appropriate format. This example shows
+# how to:
+#
+#	* Define policies with multiple rules that contribute to the same set (e.g., `deny` below.)
+#	* Use the `not` keyword (a.k.a., negation) to test for undefined/missing fields.
+#
+# For additional information, see:
+#
+#	* Rego Logical OR: https://www.openpolicyagent.org/docs/latest/#logical-or
+#	* Rego Negation: https://www.openpolicyagent.org/docs/latest/policy-language/#negation
+
 package kubernetes.validating.existence
 
 import future.keywords.contains

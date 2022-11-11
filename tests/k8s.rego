@@ -1,36 +1,20 @@
-# Label Existence
-# ---------------
-#
-# This example extends Hello World to ensure that all Kubernetes resources specify
-# a 'costcenter' label and do so with the appropriate format. This example shows
-# how to:
-#
-#	* Define policies with multiple rules that contribute to the same set (e.g., `deny` below.)
-#	* Use the `not` keyword (a.k.a., negation) to test for undefined/missing fields.
-#
-# For additional information, see:
-#
-#	* Rego Logical OR: https://www.openpolicyagent.org/docs/latest/#logical-or
-#	* Rego Negation: https://www.openpolicyagent.org/docs/latest/policy-language/#negation
+package main
 
-package kubernetes.validating.existence
+import data.kubernetes
 
-import future.keywords.contains
-import future.keywords.if
+name = input.metadata.name
 
-# This definition checks if the costcenter label is not provided. Each rule definition
-# contributes to the set of error messages.
-deny contains msg if {
-	# The `not` keyword turns an undefined statement into a true statement. If any
-	# of the keys are missing, this statement will be true.
-	not input.request.object.metadata.labels.costcenter
-	msg := "Every resource must have a costcenter label"
+required_deployment_labels {
+	input.metadata.labels["app.kubernetes.io/name"]
+	input.metadata.labels["app.kubernetes.io/instance"]
+	input.metadata.labels["app.kubernetes.io/version"]
+	input.metadata.labels["app.kubernetes.io/component"]
+	input.metadata.labels["app.kubernetes.io/part-of"]
+	input.metadata.labels["app.kubernetes.io/managed-by"]
 }
 
-# This definition checks if the costcenter label is formatted appropriately. Each rule
-# definition contributes to the set of error messages.
-deny contains msg if {
-	value := input.request.object.metadata.labels.costcenter
-	not startswith(value, "cccode-")
-	msg := sprintf("Costcenter code must start with `cccode-`; found `%v`", [value])
+deny[msg] {
+	kubernetes.is_deployment
+	not required_deployment_labels
+	msg = sprintf("%s must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels", [name])
 }

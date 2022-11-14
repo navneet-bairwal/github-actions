@@ -36,6 +36,10 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v2
       - name: Validate Kubernetes policy
+        id: label_check
         continue-on-error: true
         run: |
           conftest test -o github -p tests/policy *.yaml
+      - name: Display missing label warning
+        if: ${{ failure() && steps.label_check.conclusion == 'failure' }}
+        run: "::warning ::Missing labels in Yaml file"

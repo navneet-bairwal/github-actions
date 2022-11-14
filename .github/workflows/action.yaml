@@ -36,5 +36,6 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v2
       - name: Validate Kubernetes policy
+        continue-on-error: true
         run: |
           conftest test -o github -p tests/policy *.yaml

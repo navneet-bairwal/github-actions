@@ -40,9 +40,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Validate Kubernetes policy
         id: label_check
-        continue-on-error: true
+        #continue-on-error: true
         run: |
           conftest test -o github -p tests/policy *.yaml
       - name: Display missing label warning
         if: ${{ steps.label_check.outcome != 'success' }}
-        run: echo "::warning ::Missing labels/annotations in Yaml"
+        run: echo "::warning ::Missing labels/annotations in YAML files"

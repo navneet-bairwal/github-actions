@@ -29,7 +29,6 @@ jobs:
 
     - name: Run OPA Tests
       run: opa test tests/*.rego -v
-jobs:
   conftest:
     runs-on: ubuntu-latest
     container: openpolicyagent/conftest:latest

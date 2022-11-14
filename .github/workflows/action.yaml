@@ -19,19 +19,19 @@ on:
 #       - run: ./test-file.sh
 #       - run: echo "::warning file=missing_annotations ::Missing semicolon"
 jobs:
-  Run-OPA-Tests:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repository code
-      uses: actions/checkout@v3
+  # Run-OPA-Tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Check out repository code
+  #     uses: actions/checkout@v3
 
-    - name: Setup OPA
-      uses: open-policy-agent/setup-opa@v2
-      with:
-        version: latest
+  #   - name: Setup OPA
+  #     uses: open-policy-agent/setup-opa@v2
+  #     with:
+  #       version: latest
 
-    - name: Run OPA Tests
-      run: opa test tests/*.rego -v
+  #   - name: Run OPA Tests
+  #     run: opa test tests/*.rego -v
   conftest:
     runs-on: ubuntu-latest
     container: openpolicyagent/conftest:latest

@@ -29,3 +29,13 @@ jobs:
 
     - name: Run OPA Tests
       run: opa test tests/*.rego -v
+jobs:
+  conftest:
+    runs-on: ubuntu-latest
+    container: openpolicyagent/conftest:latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v2
+      - name: Validate Kubernetes policy
+        run: |
+          conftest test -o github -p tests/policy tests/label-k8s.yaml

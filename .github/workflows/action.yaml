@@ -42,4 +42,4 @@ jobs:
           conftest test -o github -p tests/policy *.yaml
       - name: Display missing label warning
         if: ${{ failure() && steps.label_check.conclusion == 'failure' }}
-        run: "::warning ::Missing labels in Yaml file"
+        run: echo "::warning ::Missing labels in Yaml file"

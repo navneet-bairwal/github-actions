@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx
   annotations: 
-   # team : data-team
+    team : data-team
     environment : production
     service : data-ingestion-service
     suite : plat

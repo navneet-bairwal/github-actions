@@ -32,4 +32,4 @@ jobs:
         version: latest
 
     - name: Run OPA Tests
-      run: opa eval --data policy/test_k8s.rego -i input_data/test.yaml data.main -f pretty --fail-defined
+      run: opa eval --data tests/policy/test_k8s.rego -i input_data/test.yaml data.main -f pretty --fail-defined

@@ -1,4 +1,4 @@
-name: Check Tagging & Annotation
+name: Run OPA Check for Tagging & Annotation
 
 on: 
   push:
@@ -9,13 +9,27 @@ on:
         - main
 
 jobs:
-  Check-Tagging-and-Annotations :
+  # Check-Tagging-and-Annotations :
+  #   runs-on: ubuntu-latest
+  #   container: openpolicyagent/conftest:latest
+  #   steps:
+  #     - name: Code checkout
+  #       uses: actions/checkout@v2
+  #     - name: Validate Kubernetes policy
+  #       id: label_check
+  #       run: |
+  #         conftest test -o github -p tests/policy *.yaml
+
+  Run-OPA-Tests:
     runs-on: ubuntu-latest
-    container: openpolicyagent/conftest:latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v2
-      - name: Validate Kubernetes policy
-        id: label_check
-        run: |
-          conftest test -o github -p tests/policy *.yaml
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Setup OPA
+      uses: open-policy-agent/setup-opa@v2
+      with:
+        version: latest
+
+    - name: Run OPA Tests
+      run: opa eval --data policy/test_k8s.rego -i input_data/test.yaml data.main -f pretty --fail-defined

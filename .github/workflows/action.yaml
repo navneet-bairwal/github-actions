@@ -18,7 +18,9 @@ jobs:
         with:
           repository: OpenGov/opa-policies
           path: policy
-        run: ls -l policy
+      - name: test OPA repository
+        run: |
+          ls -l policy
       - name: Code checkout
         uses: actions/checkout@v2
       - name: Run OPA test (conftest)

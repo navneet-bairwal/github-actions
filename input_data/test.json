@@ -7,6 +7,7 @@
         },
         "annotations": {
             "environment": "production",
+            "team": "rnd",
             "service": "data-ingestion-service",
             "suite": "plat",
             "department": "rnd"

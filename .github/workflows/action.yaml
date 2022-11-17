@@ -9,16 +9,19 @@ on:
         - main
 
 jobs:
-  # Check-Tagging-and-Annotations :
-  #   runs-on: ubuntu-latest
-  #   container: openpolicyagent/conftest:latest
-  #   steps:
-  #     - name: Code checkout
-  #       uses: actions/checkout@v2
-  #     - name: Validate Kubernetes policy
-  #       id: label_check
-  #       run: |
-  #         conftest test -o github -p tests/policy *.yaml
+  Check-Tagging-and-Annotations :
+    runs-on: ubuntu-latest
+    container: openpolicyagent/conftest:latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v2
+      - name: Run OPA test (conftest)
+        id: label_check
+        run: |
+          conftest test -o github -p tests/policy input_data/*
+      - name: Display missing label warning
+        if: ${{ steps.label_check.outcome != 'success' }}
+        run: echo "::warning ::Missing labels/annotations in Yaml"
 
   Run-OPA-Tests:
     runs-on: ubuntu-latest

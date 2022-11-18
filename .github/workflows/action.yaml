@@ -30,7 +30,7 @@ jobs:
       - name: Run OPA test (conftest)
         id: label_check
         run: |
-          conftest test -o github -p policy/production/kubernetes/test_annotations.rego data/input_data/*
+          conftest test -o github -p policy/production/kubernetes/test_annotations.rego data/input_data/* -o table
       - name: Display missing label warning
         if: ${{ steps.label_check.outcome != 'success' }}
         run: echo "::warning ::Missing labels/annotations in Yaml"

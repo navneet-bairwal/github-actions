@@ -4,8 +4,6 @@ import data.kubernetes
 import future.keywords.contains
 import future.keywords.if
 
-# This definition checks if the costcenter label is not provided. Each rule definition
-# contributes to the set of error messages.
 deny contains msg if {
 	not input.metadata.team
 	not input.metadata.annotations.team

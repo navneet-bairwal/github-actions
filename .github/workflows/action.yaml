@@ -17,17 +17,18 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: OpenGov/opa-policies
+          ref: navneet-bairwal-patch-1
           path: policy
           token: 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
       - name: test OPA repository
         run: |
-          ls -l policy
+          ls -lR policy
       - name: Code checkout
         uses: actions/checkout@v2
       - name: Run OPA test (conftest)
         id: label_check
         run: |
-          conftest test -o github -p tests/policy input_data/*
+          conftest test -o github -p policy/production/kubernetes/test_annotations.rego input_data/*
       - name: Display missing label warning
         if: ${{ steps.label_check.outcome != 'success' }}
         run: echo "::warning ::Missing labels/annotations in Yaml"

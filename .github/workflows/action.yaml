@@ -18,7 +18,7 @@ jobs:
         with:
           repository: OpenGov/opa-policies
           path: policy
-          token: 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  # replace this with variable
+          token: ${{ secrets.GITHUB_TOKEN }}  # replace this with variable
       - name: Code checkout
         uses: actions/checkout@v2
         with:

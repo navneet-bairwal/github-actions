@@ -1,7 +1,7 @@
 echo "This is test script"
 for i in `find . -type f \( -name "*.yaml" -o -name "*.yml" \)`
 do
-echo "#########"
+echo "########"
 #echo $i
 
 ####   checking file is valid yaml/kubernetes file or not ############

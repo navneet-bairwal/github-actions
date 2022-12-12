@@ -6,9 +6,9 @@
     policy-check:
        runs-on: ubuntu-latest
        container: openpolicyagent/conftest:latest
-#        needs:
-#        - detect-changes
-#        - render
+       needs:
+       - detect-changes
+       - render
        strategy:
          # Do not allow one failed branch to cause others to fail fast
          fail-fast: false

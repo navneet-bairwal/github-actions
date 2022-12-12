@@ -1,0 +1,38 @@
+
+  name: Reusable workflow to validate annotations/tags against K8s Manifest files using Centralized OPA policies
+  on:
+    workflow_call:
+  jobs:
+    policy-check:
+      runs-on: ubuntu-latest
+      container: openpolicyagent/conftest:latest
+      needs:
+      - detect-changes
+      - render
+      strategy:
+        # Do not allow one failed branch to cause others to fail fast
+        fail-fast: false
+        matrix:
+          env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
+      steps:
+      - name: Checkout opa-policies
+        if: github.event_name == 'pull_request' && matrix.env != 'shared'
+        uses: actions/checkout@v2
+        with:
+          repository: OpenGov/opa-policies
+          path: policy
+          token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
+      - name: Convert slashes to dashes for ENV_BRANCH
+        id: slashes-to-dashes
+        run: echo "ENV_BRANCH=$(echo ${{ matrix.env }} | tr '/' '-')" >> $GITHUB_OUTPUT
+    # Fetch manifests artifact from render job
+      - uses: actions/download-artifact@v3
+        if: github.event_name == 'pull_request' && matrix.env != 'shared'
+        with:
+          name: ${{ steps.slashes-to-dashes.outputs.ENV_BRANCH }}-manifests
+      - name: OPA Policy to check required annotations/tags against K8s Manifest files.
+        if: github.event_name == 'pull_request' && matrix.env != 'shared'
+        # Ignore policy check for now; remove once it is passing in all envs
+        #continue-on-error: true
+        run: |
+          conftest test -p policy/production/kubernetes/test_annotations.rego *.yaml -o table

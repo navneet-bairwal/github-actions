@@ -24,7 +24,8 @@
          with:
           repository: OpenGov/opa-policies
           path: policy
-          token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
+          token: ${{ secret.token }}
+          #token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
        - name: Convert slashes to dashes for ENV_BRANCH
          id: slashes-to-dashes
          run: echo "ENV_BRANCH=$(echo ${{ matrix.env }} | tr '/' '-')" >> $GITHUB_OUTPUT

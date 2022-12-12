@@ -24,7 +24,7 @@
          with:
           repository: OpenGov/opa-policies
           path: policy
-          token: ${{ secret.token }}
+          token: ${{ secrets.token }}
           #token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
        - name: Convert slashes to dashes for ENV_BRANCH
          id: slashes-to-dashes

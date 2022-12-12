@@ -9,11 +9,11 @@
 #        needs:
 #        - detect-changes
 #        - render
-       strategy:
-         # Do not allow one failed branch to cause others to fail fast
-         fail-fast: false
-         matrix:
-           env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
+#        strategy:
+#          # Do not allow one failed branch to cause others to fail fast
+#          fail-fast: false
+#          matrix:
+#            env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
        steps:
        - name: Checkout opa-policies
       #  if: github.event_name == 'pull_request' && matrix.env != 'shared'

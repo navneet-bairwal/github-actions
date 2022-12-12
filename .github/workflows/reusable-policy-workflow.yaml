@@ -2,6 +2,9 @@
   name: Reusable workflow to validate annotations/tags against K8s Manifest files using Centralized OPA policies
   on:
     workflow_call:
+      secrets:
+        token:
+          required: true
   jobs:
     policy-check:
        runs-on: ubuntu-latest

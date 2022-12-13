@@ -2,6 +2,10 @@
   name: Reusable workflow to validate annotations/tags against K8s Manifest files using Centralized OPA policies
   on:
     workflow_call:
+      inputs:
+        env_branch:
+          required: true
+          type: string
       secrets:
         token:
           required: true
@@ -28,7 +32,7 @@
           #token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
        - name: Convert slashes to dashes for ENV_BRANCH
          id: slashes-to-dashes
-         run: echo "ENV_BRANCH=$(echo ${{ matrix.env }} | tr '/' '-')" >> $GITHUB_OUTPUT
+         run: echo "ENV_BRANCH=$(echo ${{ input.env_branch }} | tr '/' '-')" >> $GITHUB_OUTPUT
     # Fetch manifests artifact from render job
        - uses: actions/download-artifact@v3
        # if: github.event_name == 'pull_request' && matrix.env != 'shared'

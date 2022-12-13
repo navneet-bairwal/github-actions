@@ -16,11 +16,11 @@
 #        needs:
 #        - detect-changes
 #        - render
-       strategy:
-         # Do not allow one failed branch to cause others to fail fast
-         fail-fast: false
-         matrix:
-           env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
+#        strategy:
+#          # Do not allow one failed branch to cause others to fail fast
+#          fail-fast: false
+#          matrix:
+#            env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
        steps:
        - name: Checkout opa-policies
       #  if: github.event_name == 'pull_request' && matrix.env != 'shared'
@@ -32,7 +32,7 @@
           #token: ${{ secrets.GIT_HUB_ACCESS_TOKEN_ENG_BOT_READER }}
        - name: Convert slashes to dashes for ENV_BRANCH
          id: slashes-to-dashes
-         run: echo "ENV_BRANCH=$(echo ${{ input.env_branch }} | tr '/' '-')" >> $GITHUB_OUTPUT
+         run: echo "ENV_BRANCH=$(echo ${{ inputs.env_branch }} | tr '/' '-')" >> $GITHUB_OUTPUT
     # Fetch manifests artifact from render job
        - uses: actions/download-artifact@v3
        # if: github.event_name == 'pull_request' && matrix.env != 'shared'

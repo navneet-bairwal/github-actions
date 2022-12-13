@@ -23,7 +23,8 @@
 #            env: ${{ fromJSON(needs.detect-changes.outputs.env) }}
        steps:
        - name: Checkout opa-policies
-      #  if: github.event_name == 'pull_request' && matrix.env != 'shared'
+         #removed github.event_name == 'pull_request'  from if condition in called workflow event is not pull_request
+         if: matrix.env != 'shared'
          uses: actions/checkout@v2
          with:
           repository: OpenGov/opa-policies
@@ -35,11 +36,13 @@
          run: echo "ENV_BRANCH=$(echo ${{ inputs.env_branch }} | tr '/' '-')" >> $GITHUB_OUTPUT
     # Fetch manifests artifact from render job
        - uses: actions/download-artifact@v3
-       # if: github.event_name == 'pull_request' && matrix.env != 'shared'
+         #removed github.event_name == 'pull_request'  from if condition in called workflow event is not pull_request
+         if: matrix.env != 'shared'
          with:
           name: ${{ steps.slashes-to-dashes.outputs.ENV_BRANCH }}-manifests
        - name: OPA Policy to check required annotations/tags against K8s Manifest files.
-     #  if: github.event_name == 'pull_request' && matrix.env != 'shared'
+         #removed github.event_name == 'pull_request'  from if condition in called workflow event is not pull_request
+         if: matrix.env != 'shared'
         # Ignore policy check for now; remove once it is passing in all envs
         #continue-on-error: true
          run: |

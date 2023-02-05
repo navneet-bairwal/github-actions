@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - reusable-workflow
   pull_request:
     branches:
       - main
+      - reusable-workflow
 
 # jobs:
 # Check-Tagging-and-Annotations :

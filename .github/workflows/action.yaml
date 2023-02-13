@@ -48,6 +48,6 @@ jobs:
         id: read-yaml
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.runs.version' 'remote_chart.yml'
+          cmd: yq '.runs.version' 'remote_chart.yml'; yq '.runs.service' 'remote_chart.yml'
       - name: Reuse a variable obtained in another step
         run: echo ${{ steps.read-yaml.outputs.result }}

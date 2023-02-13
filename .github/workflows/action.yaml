@@ -47,7 +47,7 @@ jobs:
         with:
           cmd: |
             echo "chart_version=$(yq '.runs.version' 'remote_chart.yml')" >> $GITHUB_ENV
-            echo "chart_version=$(yq '.runs.service' 'remote_chart.yml')" >> $GITHUB_ENV
+            echo "service_name=$(yq '.runs.service' 'remote_chart.yml')" >> $GITHUB_ENV
           #echo "chart_version=$(cat env/ace-service/integration/kustomization.yaml|grep version|cut -d ":" -f 2 )" >> $GITHUB_ENV
       - name: Reuse a variable obtained in another step
         run: echo ${{ steps.read-yaml.outputs.result }}

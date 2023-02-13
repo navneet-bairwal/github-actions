@@ -49,6 +49,6 @@ jobs:
         uses: jbutcher5/read-yaml@1.6
         with:
           file: './remote_chart.yml'          # File to read from
-          key-path: '["runs","service"], ["runs","version"]'
+          key-path: '["runs","service"] ["runs","version"]'
       - name: Display read-yaml output
         run: echo "${{ steps.yaml-data.outputs.data }}"

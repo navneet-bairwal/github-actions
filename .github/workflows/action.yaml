@@ -45,6 +45,7 @@ jobs:
         with:
           default_author: github_actions
       - name: Read yaml
+        id: yaml-data
         uses: jbutcher5/read-yaml@1.6
         with:
           file: './remote_chart.yml'          # File to read from

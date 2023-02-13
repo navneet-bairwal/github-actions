@@ -1,5 +1,4 @@
 ---
 runs:
-  - using:
-      - ace-service
-      - github_actions
+  service: ace-service
+  technology: github_actions

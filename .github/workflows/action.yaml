@@ -1,29 +1,56 @@
 name: Run OPA Check for Tagging & Annotation
 
-on: 
+on:
   push:
-      branches:
-        - main  
+    branches:
+      - main
+      - reusable-workflow
   pull_request:
-      branches:
-        - main
+    branches:
+      - main
+      - reusable-workflow
 
+# jobs:
+# Check-Tagging-and-Annotations :
+#   runs-on: ubuntu-latest
+#   container: openpolicyagent/conftest:latest
+#   steps:
+#     - name: Code checkout
+#       uses: actions/checkout@v2
+#       with:
+#         repository: OpenGov/opa-policies
+#         path: policy
+#         token: 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  # replace this with variable
+#     - name: Code checkout
+#       uses: actions/checkout@v2
+#       with:
+#         path: data
+#     - name: Run OPA test (conftest)
+#       id: label_check
+#       run: |
+#         conftest test -o github -p policy/production/kubernetes/test_annotations.rego data/*.yaml -o table
 jobs:
-  Check-Tagging-and-Annotations :
+  download-charts:
     runs-on: ubuntu-latest
-    container: openpolicyagent/conftest:latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v3
         with:
-          repository: OpenGov/opa-policies
-          path: policy
-          token: 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  # replace this with variable
-      - name: Code checkout
-        uses: actions/checkout@v2
-        with:
-          path: data
-      - name: Run OPA test (conftest)
-        id: label_check
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: download
         run: |
-          conftest test -o github -p policy/production/kubernetes/test_annotations.rego data/*.yaml -o table
+          helm pull --untar --repo https://charts.bitnami.com/bitnami elasticsearch
+      - name: read yaml
+        id: read-yaml
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            echo "chart_version=$(yq '.runs.version' 'remote_chart.yml')" >> $GITHUB_ENV
+            echo "service_name=$(yq '.runs.service' 'remote_chart.yml')" >> $GITHUB_ENV
+          #echo "chart_version=$(cat env/ace-service/integration/kustomization.yaml|grep version|cut -d ":" -f 2 )" >> $GITHUB_ENV
+      - run: |
+          helm pull --untar --repo https://charts.bitnami.com/bitnami ${{ env.chart_version }} ${{ env.service_name }}
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
